@@ -34,6 +34,7 @@ class MainWindow(tk.Tk):
 					move=-1
 			self.text_area.yview_scroll(int(move), "units")
 			self.line_numbers.yview_scroll(int(move), "units")
+
 	def bind_events(self):
 		self.text_area.bind("<MouseWheel>", self.scroll_text)
 		self.text_area.bind("<Button-4>", self.scroll_text)
