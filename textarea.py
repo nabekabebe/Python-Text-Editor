@@ -6,6 +6,7 @@ class TextArea(tk.Text):
 		self.bind_events()
 		self.master = master
 		self.config(wrap=tk.WORD)
+
 	def bind_events(self):
 		self.bind("<Control-a>",self.select_all)
 		self.bind("<Control-c>", self.copy)

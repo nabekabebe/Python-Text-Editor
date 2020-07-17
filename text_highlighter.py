@@ -15,7 +15,7 @@ class Highlighter:
 		#self.tag_configure('keyword', foreground=self.keywords_color)
 		#self.tag_configure('number', foreground=self.numbers_color)
 		self.text_widget.bind('<KeyRelease>',self.on_key_release)
-		self.text_widget.pack(fill=tk.BOTH,expand=1)
+		#self.text_widget.pack(fill=tk.BOTH,expand=1)
 
 	def on_key_release(self, event=None):
 		self.highlight()

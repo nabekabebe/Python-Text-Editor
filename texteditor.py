@@ -1,7 +1,9 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 
+from text_highlighter import Highlighter
 from textarea import TextArea
+from line_numbers import LineNumbers
 
 class MainWindow(tk.Tk):
 	def __init__(self):
@@ -10,15 +12,18 @@ class MainWindow(tk.Tk):
 		self.scrollbar = ttk.Scrollbar(orient="vertical",command=self.scroll_text)
 		self.text_area.configure(yscrollcommand = self.scrollbar.set)
 
-		self.line_numbers = tk.Text(self, bg="black", fg="white")
-		first_100_numbers = [str(n) for n in range(1,101)]
-		self.line_numbers.insert(1.0,"\n".join(first_100_numbers))
-		self.line_numbers.configure(state="disabled", width=3,yscrollcommand=self.scrollbar.set)
+		self.line_numbers = LineNumbers(self, self.text_area, width=1, bg="black", fg="cyan")
+		#self.line_numbers = tk.Text(self, bg="black", fg="white")
+		#first_100_numbers = [str(n) for n in range(1,101)]
+		#self.line_numbers.insert(1.0,"\n".join(first_100_numbers))
+		#self.line_numbers.configure(state="disabled", width=3,yscrollcommand=self.scrollbar.set)
 
 		self.line_numbers.pack(side=tk.LEFT, fill=tk.Y)
 		self.scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
 		self.text_area.pack(side = tk.LEFT, fill = tk.BOTH, expand = 1 )
 		self.bind_events()
+		self.highlight = Highlighter(self.text_area)
+
 	def scroll_text(self, *args):
 		if len(args) > 1:
 			self.text_area.yview_moveto(args[1])
