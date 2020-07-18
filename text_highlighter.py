@@ -70,7 +70,8 @@ class Highlighter:
 				self.highlight_regex(r"[\"][^\']*[\"]", "string")
 				self.highlight_regex(r"\(.*\)", "parenthesis")
 
-
+	def force_highlight(self):
+		self.highlight()
 #if __name__ == "__main__":
 #	w = tk.Tk()
 #	h = Highlighter(tk.Text(w))

@@ -29,6 +29,8 @@ class LineNumbers(tk.Text):
 		self.insert(1.0, line_numbers)
 		self.configure(state = "disabled")
 
+	def force_update(self):
+		self.on_key_press()
 
 #if __name__ == "__main__":
 #	w = tk.Tk()
