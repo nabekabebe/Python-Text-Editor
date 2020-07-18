@@ -15,7 +15,7 @@ class Highlighter:
 		#self.tag_configure('keyword', foreground=self.keywords_color)
 		#self.tag_configure('number', foreground=self.numbers_color)
 		self.text_widget.bind('<KeyRelease>',self.on_key_release)
-		#self.text_widget.pack(fill=tk.BOTH,expand=1)
+		self.text_widget.pack(fill=tk.BOTH,expand=1)
 
 	def on_key_release(self, event=None):
 		self.highlight()
@@ -23,12 +23,12 @@ class Highlighter:
 	def highlight_regex(self, regexp, tag):
 		length = tk.IntVar()
 		start = 1.0
-		idx = self.text_widget.search(regexp, start,tk.END, regexp=1, count=length)
+		idx = self.text_widget.search(r"(\d)+[.]?(\d)*", start,tk.END, regexp=1, count=length)
 		while idx:
 			end = f"{idx}+{length.get()}c"
-			self.text_widget.tag_add(tag, idx, end)
+			self.text_widget.tag_add("number", idx, end)
 			start = end
-			idx = self.text_widget.search(regexp,start,tk.END,regexp=1,count=length)
+			idx = self.text_widget.search(r"(\d)+[.]?(\d)*",start,tk.END,regexp=1,count=length)
 
 	def configure_tags(self):
 		for category in self.categories.keys():
@@ -36,11 +36,12 @@ class Highlighter:
 			self.text_widget.tag_configure(category, foreground=color)
 		self.text_widget.tag_configure("number", foreground=self.numbers_color)
 		self.text_widget.tag_configure("string", foreground=self.strings_color)
-		self.text_widget.tag_configure("parenthesis", foreground=self.config['parenthesis']['color'])
+
 	def highlight(self, event=None):
 		length = tk.IntVar()
 		for category in self.categories:
-			matches = self.categories[category]['matches']
+			matches = self.categories[category][]
+			print(matches)
 			for keyword in matches:
 				start = 1.0
 				keyword = keyword + "[^A-Za-z_-]"
@@ -68,10 +69,9 @@ class Highlighter:
 				self.highlight_regex(r"(\d)+[.]?(\d)*", "number")
 				self.highlight_regex(r"[\'][^\']*[\']", "string")
 				self.highlight_regex(r"[\"][^\']*[\"]", "string")
-				self.highlight_regex(r"\(.*\)", "parenthesis")
 
 
-#if __name__ == "__main__":
-#	w = tk.Tk()
-#	h = Highlighter(tk.Text(w))
-#	w.mainloop()
+if __name__ == "__main__":
+	w = tk.Tk()
+	h = Highlighter(tk.Text(w))
+	w.mainloop()

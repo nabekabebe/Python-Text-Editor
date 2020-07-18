@@ -5,14 +5,22 @@ class LineNumbers(tk.Text):
 		super().__init__(master, **kwargs)
 
 		self.text_widget = text_widget
-		self.text_widget.bind('<KeyPress>', self.on_key_press)
 
 		self.insert(1.0, '1')
 		self.configure(state='disabled')
 
+		self.text_widget.bind('<Control-v>', self.get_cursor_index)
+		self.text_widget.bind('<KeyPress>', self.on_key_press)
+
+	def get_cursor_index(self, event=None):
+		index = str(self.text_widget.index(tk.INSERT)).split('.')[0]
+		return index
+
 	def on_key_press(self, event=None):
 		final_index = str(self.text_widget.index(tk.END))
 		line_num = final_index.split('.')[0]
+		if int( self.get_cursor_index(event=None)) > int(line_num):
+			line_numbers = self.get_cursor_index(event=None)
 		line_numbers = '\n'.join( str(no + 1) for no in range(int(line_num)))
 
 		line_width = len(str(line_num))

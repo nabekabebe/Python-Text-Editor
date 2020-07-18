@@ -7,7 +7,8 @@ lang_config = {
 'builtins':{"color":"brown","matches": dir(__builtins__)}	
 },
 'numbers':{"color": "purple"},
-'strings':{"color": "pink"}
+'strings':{"color": "pink"},
+'parenthesis':{"color":"teal"}
 }
 
 """

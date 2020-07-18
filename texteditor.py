@@ -4,6 +4,7 @@ import tkinter.ttk as ttk
 from text_highlighter import Highlighter
 from textarea import TextArea
 from line_numbers import LineNumbers
+from findwindow import FindWindow
 
 class MainWindow(tk.Tk):
 	def __init__(self):
@@ -48,6 +49,10 @@ class MainWindow(tk.Tk):
 		self.line_numbers.bind("<MouseWheel>", lambda e: "break")
 		self.line_numbers.bind("<Button-4>", lambda e: "break")
 		self.line_numbers.bind("<Button-5>", lambda e: "break")
+		self.bind('<Control-f>', self.show_find_window)
+
+	def show_find_window(self, event = None):
+		FindWindow(self.text_area)
 
 if __name__ == '__main__':
 	MainWindow().mainloop()
