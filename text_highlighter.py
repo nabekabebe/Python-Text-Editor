@@ -15,7 +15,6 @@ class Highlighter:
 			self.strings_color = self.config['strings']['color']
 			self.configure_tags()
 			self.text_widget.bind('<KeyRelease>',self.on_key_release)
-
 		self.disallowed_previous_chars = ["_","-","."]
 
 	def parse_syntax_file(self):
@@ -48,6 +47,7 @@ class Highlighter:
 		self.text_widget.tag_configure("string", foreground=self.strings_color)
 		self.text_widget.tag_configure("parenthesis", foreground=self.config['parenthesis']['color'])
 	def highlight(self, event=None):
+		self.clear_highlight()
 		length = tk.IntVar()
 		for category in self.categories:
 			matches = self.categories[category]['matches']
@@ -75,6 +75,7 @@ class Highlighter:
 						self.text_widget.tag_add(category, idx, end)
 						start = end
 						idx = self.text_widget.search(keyword, start, tk.END, regexp=1)
+
 				self.highlight_regex(r"(\d)+[.]?(\d)*", "number")
 				self.highlight_regex(r"[\'][^\']*[\']", "string")
 				self.highlight_regex(r"[\"][^\']*[\"]", "string")

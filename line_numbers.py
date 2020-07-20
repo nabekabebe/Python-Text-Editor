@@ -30,6 +30,7 @@ class LineNumbers(tk.Text):
 		self.delete(1.0, tk.END)
 		self.insert(1.0, line_numbers)
 		self.configure(state = "disabled")
+		self.see(str(self.text_widget.index(tk.INSERT)))
 
 	def force_update(self):
 		self.on_key_press()
