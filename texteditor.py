@@ -90,6 +90,13 @@ class MainWindow(tk.Tk):
 
 		self.line_numbers.force_update()
 
+	def load_syntax_highlighting_file(self):
+		syntax_file = filedialog.askopenfilename(filetypes=[("JSON file",("*.json"))])
+		if syntax_file:
+			self.highlight.clear_highlight()
+			self.highlight = Highlighter(self.text_area, syntax_file)
+			self.highlight.force_highlight()
+
 	def configure_ttk_elements(self):
 		style = ttk.Style()
 		style.configure('editor.TLabel', foreground=self.foreground, background=self.background)
@@ -127,7 +134,7 @@ class MainWindow(tk.Tk):
 		self.bind('<Control-o>', self.file_open)
 		self.bind('<Control-s>', self.file_save)
 		self.bind('<Control-h>', self.help_about)
-		#self.bind('<Control-m>', self.tools_change_syntax_highlighting)
+		self.bind('<Control-m>', self.tools_change_syntax_highlighting)
 		self.bind('<Control-g>', self.tools_change_color_scheme)
 		self.bind('<Control-l>', self.tools_change_font)
 
@@ -223,6 +230,11 @@ class MainWindow(tk.Tk):
 	def tools_change_color_scheme(self, event=None):
 		#ctrl + g
 		self.change_color_scheme()
+
+	def tools_change_syntax_highlighting(self, event=None):
+		#ctrl + m
+		self.load_syntax_highlighting_file()
+
 	def change_color_scheme(self):
 		self.scheme_color = ChooseColor(self)
 

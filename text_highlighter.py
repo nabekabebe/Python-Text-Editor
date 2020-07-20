@@ -83,3 +83,7 @@ class Highlighter:
 	def force_highlight(self):
 		self.highlight()
 
+	def clear_highlight(self):
+		for category in self.categories.keys():
+			self.text_widget.tag_remove(category, 1.0, tk.END)
+
