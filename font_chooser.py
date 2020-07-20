@@ -11,6 +11,8 @@ class FontChooser(tk.Toplevel):
 		self.geometry("500x200")
 		self.title("Font")
 
+		self.configure(bg=self.master.background)
+
 		self.font_list = tk.Listbox(self, exportselection=False)
 		self.available_fonts = sorted(families())
 		self.master.font_family = self.available_fonts[0]
@@ -23,8 +25,8 @@ class FontChooser(tk.Toplevel):
 
 		self.size_input = tk.Spinbox(self, from_=5, to=99, value=self.master.font_size)
 
-		self.save_button = tk.Button(self, text="Save", command= self.save)
-		self.cancel_button = tk.Button(self, text="Cancel", command=self.destroy)
+		self.save_button = ttk.Button(self, text="Save", command= self.save, style="editor.TButton")
+		self.cancel_button = ttk.Button(self, text="Cancel", command=self.destroy, style="editor.TButton")
 
 		self.cancel_button.pack(side = tk.BOTTOM, fill=tk.X, expand=1, padx=50)
 		self.save_button.pack(side=tk.BOTTOM, fill=tk.X, expand=1,  padx=50)

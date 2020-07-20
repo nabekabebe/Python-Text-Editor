@@ -6,11 +6,13 @@ class LineNumbers(tk.Text):
 
 		self.text_widget = text_widget
 
+
 		self.insert(1.0, '1')
-		self.configure(state='disabled')
+		self.configure(state='disabled', font=(master.font_family, master.font_size))
 
 		self.text_widget.bind('<Control-v>', self.get_cursor_index)
 		self.text_widget.bind('<KeyPress>', self.on_key_press)
+		self.on_key_press()
 
 	def get_cursor_index(self, event=None):
 		index = str(self.text_widget.index(tk.INSERT)).split('.')[0]
@@ -31,6 +33,8 @@ class LineNumbers(tk.Text):
 
 	def force_update(self):
 		self.on_key_press()
+		self.configure(bg=self.master.background, fg=self.master.foreground)
+
 
 #if __name__ == "__main__":
 #	w = tk.Tk()
