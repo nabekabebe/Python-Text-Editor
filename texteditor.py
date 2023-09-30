@@ -14,6 +14,7 @@ import json
 class MainWindow(tk.Tk):
 	def __init__(self):
 		super().__init__()
+		self.title("Simple Text Editor - Nabek")
 		self.background = "lightgrey"
 		self.foreground = "black"
 		self.text_background = "white"
