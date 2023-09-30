@@ -14,7 +14,6 @@ import json
 class MainWindow(tk.Tk):
 	def __init__(self):
 		super().__init__()
-
 		self.background = "lightgrey"
 		self.foreground = "black"
 		self.text_background = "white"
@@ -38,10 +37,10 @@ class MainWindow(tk.Tk):
 		self.right_click_menu.add_command(label='Paste', command=self.edit_paste)
 
 		self.line_numbers = LineNumbers(self, self.text_area, width=2, bg=self.background, fg=self.foreground)
-		#self.line_numbers = tk.Text(self, bg="black", fg="white")
-		#first_100_numbers = [str(n) for n in range(1,101)]
-		#self.line_numbers.insert(1.0,"\n".join(first_100_numbers))
-		#self.line_numbers.configure(state="disabled", width=3,yscrollcommand=self.scrollbar.set)
+		self.line_numbers = tk.Text(self, bg="black", fg="white")
+		first_100_numbers = [str(n) for n in range(1,101)]
+		self.line_numbers.insert(1.0,"\n".join(first_100_numbers))
+		self.line_numbers.configure(state="disabled", width=3,yscrollcommand=self.scrollbar.set)
 
 		self.line_numbers.pack(side=tk.LEFT, fill=tk.Y)
 		self.scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
