@@ -1,4 +1,4 @@
-# Simple Text Editor with Python Tkinter
+# Text Editor with Python Tkinter
 
 This is a simple text editor created using Python Tkinter, a popular GUI toolkit. The editor provides essential features for text editing along with some additional functionalities to enhance the user experience.
 
